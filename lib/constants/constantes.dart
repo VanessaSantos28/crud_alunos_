@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 const kTextStyleSubtitle =
-    const TextStyle(fontSize: 12.5, color: Color.fromARGB(255, 117, 117, 117));
+    TextStyle(fontSize: 12.5, color: Color.fromARGB(255, 117, 117, 117));
 
-const kSmallTextStyleSubtitle = const TextStyle(
+const kSmallTextStyleSubtitle = TextStyle(
   fontSize: 12.5,
   color: Color.fromARGB(255, 117, 117, 117),
   fontWeight: FontWeight.bold,
@@ -11,3 +11,5 @@ const kSmallTextStyleSubtitle = const TextStyle(
 
 const kSmallTextStyleMensalidade =
     TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontSize: 14);
+
+const kTitleStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.bold);

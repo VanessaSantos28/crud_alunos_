@@ -4,21 +4,20 @@ class Aluno {
   final String email;
   final String telefone;
   final String valorMensalidade;
-  final String senha;
+  final String? senha;
   final String situacao;
-  final String? desc;
-  final String? avatarURL;
+  final String desc;
 
-  const Aluno(
-      {this.id,
-      required this.nome,
-      required this.email,
-      required this.telefone,
-      required this.valorMensalidade,
-      required this.senha,
-      required this.situacao,
-      this.desc,
-      this.avatarURL});
+  const Aluno({
+    this.id,
+    required this.nome,
+    required this.email,
+    required this.telefone,
+    required this.valorMensalidade,
+    this.senha,
+    required this.situacao,
+    required this.desc,
+  });
 
   static Aluno fromMap(Map<String, dynamic> data) {
     return Aluno(

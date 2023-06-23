@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TextFieldAluno extends StatelessWidget {
-  final TextEditingController controllerAluo;
+  final TextEditingController controllerAluno;
   final String hintTextAluno;
   final int? nLinhas;
 
   const TextFieldAluno(
       {super.key,
-      required this.controllerAluo,
+      required this.controllerAluno,
       required this.hintTextAluno,
       this.nLinhas});
 
@@ -22,7 +22,7 @@ class TextFieldAluno extends StatelessWidget {
         return null;
       },
       maxLines: nLinhas,
-      controller: controllerAluo,
+      controller: controllerAluno,
       decoration: InputDecoration(
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(20))),

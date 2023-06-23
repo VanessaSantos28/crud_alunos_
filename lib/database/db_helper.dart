@@ -2,6 +2,7 @@ import 'package:crud_teste_pratico/models/aluno.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
 class SQLHelper {
+  // -------------CRIANDO O BANCO DE DADOS ALUNOS------------------
   static Future<void> createTables(sql.Database database) async {
     await database.execute("""
 CREATE TABLE data(
@@ -18,6 +19,7 @@ CREATE TABLE data(
 """);
   }
 
+// -------------ABRINDO DATABASE ALUNOS------------------
   static Future<sql.Database> db() async {
     return sql.openDatabase("database_aluno.db", version: 1,
         onCreate: (sql.Database database, int version) async {
@@ -25,6 +27,7 @@ CREATE TABLE data(
     });
   }
 
+// -------------CRIAR NOVO ALUNOS------------------
   static Future<int> createData(
       String nome,
       String? desc,
@@ -48,6 +51,7 @@ CREATE TABLE data(
     return id;
   }
 
+// -------------PEGAR AS INFORMAÇOES ALUNOS------------------
   static Future<List<Aluno>> getAllData() async {
     final db = await SQLHelper.db();
     final data = await db.query('data', orderBy: 'id');
@@ -59,6 +63,7 @@ CREATE TABLE data(
     return db.query('data', where: "id = ? ", whereArgs: [id], limit: 1);
   }
 
+// -------------ATUALIZAR ALUNOS------------------
   static Future<int> updateData(
       int id,
       String nome,
@@ -85,6 +90,7 @@ CREATE TABLE data(
     return result;
   }
 
+// -------------DELETAR ALUNOS------------------
   static Future<void> deleteData(int id) async {
     final db = await SQLHelper.db();
     try {

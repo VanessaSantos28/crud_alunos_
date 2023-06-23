@@ -43,9 +43,11 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 118, 6, 138),
-        title: const Text(
-          'Lista de Alunos',
-          style: TextStyle(color: Colors.white),
+        title: const Center(
+          child: Text(
+            'Lista de Alunos',
+            style: kTitleStyle,
+          ),
         ),
       ),
       body: ListView.separated(
@@ -61,28 +63,24 @@ class _HomeState extends State<Home> {
           ),
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 5),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Text(
+                  _allData[index].nome,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Row(
                   children: [
+                    const Text(
+                      "Mensalidade: ",
+                      style: kTextStyleSubtitle,
+                    ),
                     Text(
-                      _allData[index].nome,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Mensalidade: ",
-                          style: kTextStyleSubtitle,
-                        ),
-                        Text(
-                          "${_allData[index].valorMensalidade}",
-                          style: kSmallTextStyleMensalidade,
-                        )
-                      ],
-                    ),
+                      _allData[index].valorMensalidade,
+                      style: kSmallTextStyleMensalidade,
+                    )
                   ],
                 ),
               ],
@@ -107,18 +105,6 @@ class _HomeState extends State<Home> {
               Row(
                 children: [
                   const Text(
-                    "Senha: ",
-                    style: kTextStyleSubtitle,
-                  ),
-                  Text(
-                    _allData[index].senha,
-                    style: kSmallTextStyleSubtitle,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text(
                     "Tel.: ",
                     style: kTextStyleSubtitle,
                   ),
@@ -136,7 +122,7 @@ class _HomeState extends State<Home> {
                     style: kTextStyleSubtitle,
                   ),
                   Text(
-                    _allData[index].desc ?? "",
+                    _allData[index].desc,
                     style: kSmallTextStyleSubtitle,
                   )
                 ],
@@ -163,14 +149,12 @@ class _HomeState extends State<Home> {
                       textOffColor: Colors.white,
                       onTap: () {},
                       onDoubleTap: () {},
-                      onSwipe: (bool state) {
-                        // ignore: avoid_print
-                        return print("turned ${(state) ? "on" : "off"}");
-                      },
+                      onSwipe: () {},
                       onChanged: (bool state) {
                         setState(() {
                           // ignore: avoid_print
-                          return print("turned ${(state) ? "on" : "off"}");
+                          return print(
+                              "Aluno(a) ${(state) ? "ativa" : "inativa"}");
                         });
                       }),
                 ),
@@ -200,21 +184,21 @@ class _HomeState extends State<Home> {
                         showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                                  title: Text('Excluir usuário'),
-                                  content: Text('Tem certeza?'),
+                                  title: const Text('Excluir usuário'),
+                                  content: const Text('Tem certeza?'),
                                   actions: [
                                     TextButton(
+                                      child: const Text("Não"),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text("Não"),
                                     ),
                                     TextButton(
+                                      child: const Text("Sim"),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                         _deleteData(_allData[index].id!);
                                       },
-                                      child: Text("Sim"),
                                     ),
                                   ],
                                 ));

@@ -1,6 +1,7 @@
 import 'package:crud_teste_pratico/models/aluno.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/constantes.dart';
 import '../database/db_helper.dart';
 import '../models/text_field_aluno.dart';
 
@@ -35,15 +36,16 @@ class _AlunoFormState extends State<AlunoForm> {
   }
 
   void populateForm() {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _aluno = aluno;
     if (_aluno != null) {
       _nomeController.text = _aluno.nome;
-      _descController.text = _aluno.desc ?? "";
+      _descController.text = _aluno.desc;
       _emailController.text = _aluno.email;
       _situacaoController.text = _aluno.situacao;
       _telefoneController.text = _aluno.telefone;
       _valorMensalidadeController.text = _aluno.valorMensalidade;
-      _senhaController.text = _aluno.senha;
+      _senhaController.text = _aluno.senha ?? "";
     }
   }
 
@@ -80,7 +82,7 @@ class _AlunoFormState extends State<AlunoForm> {
         backgroundColor: const Color.fromARGB(255, 118, 6, 138),
         title: const Text(
           'Cadastro de Alunos',
-          style: TextStyle(color: Colors.white),
+          style: kTitleStyle,
         ),
       ),
       body: Form(
@@ -89,42 +91,42 @@ class _AlunoFormState extends State<AlunoForm> {
           padding: const EdgeInsets.all(8),
           children: [
             TextFieldAluno(
-              controllerAluo: _nomeController,
-              hintTextAluno: 'Nome',
+              controllerAluno: _nomeController,
+              hintTextAluno: 'Nome:',
             ),
             const SizedBox(
               height: 10,
             ),
             TextFieldAluno(
-              controllerAluo: _valorMensalidadeController,
+              controllerAluno: _valorMensalidadeController,
               hintTextAluno: 'Mensalidade:',
             ),
             const SizedBox(
               height: 10,
             ),
             TextFieldAluno(
-              controllerAluo: _emailController,
+              controllerAluno: _emailController,
               hintTextAluno: 'E-mail:',
             ),
             const SizedBox(
               height: 10,
             ),
             TextFieldAluno(
-              controllerAluo: _senhaController,
+              controllerAluno: _senhaController,
               hintTextAluno: 'Senha:',
             ),
             const SizedBox(
               height: 10,
             ),
             TextFieldAluno(
-              controllerAluo: _telefoneController,
+              controllerAluno: _telefoneController,
               hintTextAluno: 'Tel.:',
             ),
             const SizedBox(
               height: 10,
             ),
             TextFieldAluno(
-              controllerAluo: _descController,
+              controllerAluno: _descController,
               hintTextAluno: 'Observação',
               nLinhas: 4,
             ),
