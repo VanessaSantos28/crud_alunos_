@@ -2,6 +2,7 @@ import 'package:crud_teste_pratico/constants/constantes.dart';
 import 'package:crud_teste_pratico/models/aluno.dart';
 import 'package:crud_teste_pratico/pages/form.dart';
 import 'package:flutter/material.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 import '../database/db_helper.dart';
 
@@ -30,8 +31,9 @@ class _HomeState extends State<Home> {
 
   void _deleteData(int id) async {
     await SQLHelper.deleteData(id);
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: Colors.redAccent, content: Text("Data Deleted")));
+        backgroundColor: Colors.redAccent, content: Text("Usuário apagado")));
     _refreshData();
   }
 
@@ -46,110 +48,137 @@ class _HomeState extends State<Home> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(8),
         itemCount: _allData.length,
-        itemBuilder: (context, index) => Card(
-          elevation: 5,
-          margin: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              ListTile(
-                title: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _allData[index].nome,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "Mensalidade: ",
-                            style: kTextStyleSubtitle,
-                          ),
-                          Text(
-                            "${_allData[index].valorMensalidade}",
-                            style: const TextStyle(
-                                color: Colors.indigo,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                subtitle: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+        itemBuilder: (context, index) => ListTile(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: const BorderSide(
+              width: .5,
+            ),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: Row(
+              children: [
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        const Text(
-                          "E-mail: ",
-                          style: kTextStyleSubtitle,
-                        ),
-                        Text(
-                          _allData[index].email,
-                          style: kSmallTextStyleSubtitle,
-                        ),
-                      ],
+                    Text(
+                      _allData[index].nome,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
                         const Text(
-                          "Senha: ",
+                          "Mensalidade: ",
                           style: kTextStyleSubtitle,
                         ),
                         Text(
-                          _allData[index].senha,
-                          style: kSmallTextStyleSubtitle,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Tel.: ",
-                          style: kTextStyleSubtitle,
-                        ),
-                        Text(
-                          _allData[index].telefone,
-                          style: kSmallTextStyleSubtitle,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Situação.: ",
-                          style: kTextStyleSubtitle,
-                        ),
-                        Text(
-                          _allData[index].situacao,
-                          style: kSmallTextStyleSubtitle,
-                        )
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "obs.: ",
-                          style: kTextStyleSubtitle,
-                        ),
-                        Text(
-                          _allData[index].desc ?? "",
-                          style: kSmallTextStyleSubtitle,
+                          "${_allData[index].valorMensalidade}",
+                          style: kSmallTextStyleMensalidade,
                         )
                       ],
                     ),
                   ],
                 ),
-                trailing: Row(
+              ],
+            ),
+          ),
+          subtitle: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Text(
+                    "E-mail: ",
+                    style: kTextStyleSubtitle,
+                  ),
+                  Text(
+                    _allData[index].email,
+                    style: kSmallTextStyleSubtitle,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    "Senha: ",
+                    style: kTextStyleSubtitle,
+                  ),
+                  Text(
+                    _allData[index].senha,
+                    style: kSmallTextStyleSubtitle,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    "Tel.: ",
+                    style: kTextStyleSubtitle,
+                  ),
+                  Text(
+                    _allData[index].telefone,
+                    style: kSmallTextStyleSubtitle,
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "obs.: ",
+                    style: kTextStyleSubtitle,
+                  ),
+                  Text(
+                    _allData[index].desc ?? "",
+                    style: kSmallTextStyleSubtitle,
+                  )
+                ],
+              ),
+            ],
+          ),
+          trailing: FittedBox(
+            fit: BoxFit.contain,
+            child: Column(
+              children: [
+                Transform.scale(
+                  scale: 1.2,
+                  child: LiteRollingSwitch(
+                      width: 125,
+                      iconOn: Icons.check_circle_outline,
+                      iconOff: Icons.cancel_outlined,
+                      colorOn: Colors.green,
+                      colorOff: Colors.red,
+                      textOn: "Ativo",
+                      textOff: "Inativo",
+                      value: false,
+                      textSize: 20,
+                      textOnColor: Colors.white,
+                      textOffColor: Colors.white,
+                      onTap: () {},
+                      onDoubleTap: () {},
+                      onSwipe: (bool state) {
+                        // ignore: avoid_print
+                        return print("turned ${(state) ? "on" : "off"}");
+                      },
+                      onChanged: (bool state) {
+                        setState(() {
+                          // ignore: avoid_print
+                          return print("turned ${(state) ? "on" : "off"}");
+                        });
+                      }),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
@@ -160,22 +189,53 @@ class _HomeState extends State<Home> {
                                     AlunoForm(aluno: _allData[index])))
                             .then((value) => _refreshData());
                       },
-                      icon: const Icon(Icons.edit),
+                      icon: const Icon(
+                        Icons.edit,
+                        size: 40,
+                      ),
                       color: Colors.indigo,
                     ),
                     IconButton(
                       onPressed: () {
-                        _deleteData(_allData[index].id!);
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text('Excluir usuário'),
+                                  content: Text('Tem certeza?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text("Não"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        _deleteData(_allData[index].id!);
+                                      },
+                                      child: Text("Sim"),
+                                    ),
+                                  ],
+                                ));
                       },
-                      icon: const Icon(Icons.delete),
+                      icon: const Icon(
+                        Icons.delete,
+                        size: 40,
+                      ),
                       color: Colors.redAccent,
                     )
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(
+            height: 10,
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context)

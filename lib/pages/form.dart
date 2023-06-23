@@ -2,6 +2,7 @@ import 'package:crud_teste_pratico/models/aluno.dart';
 import 'package:flutter/material.dart';
 
 import '../database/db_helper.dart';
+import '../models/text_field_aluno.dart';
 
 class AlunoForm extends StatefulWidget {
   final Aluno? aluno;
@@ -85,126 +86,47 @@ class _AlunoFormState extends State<AlunoForm> {
       body: Form(
         key: formKey,
         child: ListView(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           children: [
-            TextFormField(
-              validator: (value) {
-                final isValidator = value ?? "";
-                if (isValidator.isEmpty) {
-                  return "Campo Obrigatório";
-                }
-                return null;
-              },
-              controller: _nomeController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                hintText: "Nome",
-              ),
+            TextFieldAluno(
+              controllerAluo: _nomeController,
+              hintTextAluno: 'Nome',
             ),
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
-              validator: (value) {
-                final isValidator = value ?? "";
-                if (isValidator.isEmpty) {
-                  return "Campo Obrigatório";
-                }
-                return null;
-              },
-              controller: _valorMensalidadeController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                hintText: "Mensalidade",
-              ),
+            TextFieldAluno(
+              controllerAluo: _valorMensalidadeController,
+              hintTextAluno: 'Mensalidade:',
             ),
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
-              validator: (value) {
-                final isValidator = value ?? "";
-                if (isValidator.isEmpty) {
-                  return "Campo Obrigatório";
-                }
-                return null;
-              },
-              controller: _emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                hintText: "Email",
-              ),
+            TextFieldAluno(
+              controllerAluo: _emailController,
+              hintTextAluno: 'E-mail:',
             ),
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
-              validator: (value) {
-                final isValidator = value ?? "";
-                if (isValidator.isEmpty) {
-                  return "Campo Obrigatório";
-                }
-                return null;
-              },
-              controller: _senhaController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                hintText: "Senha",
-              ),
+            TextFieldAluno(
+              controllerAluo: _senhaController,
+              hintTextAluno: 'Senha:',
             ),
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
-              validator: (value) {
-                final isValidator = value ?? "";
-                if (isValidator.isEmpty) {
-                  return "Campo Obrigatório";
-                }
-                return null;
-              },
-              controller: _telefoneController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                hintText: "Telefone",
-              ),
+            TextFieldAluno(
+              controllerAluo: _telefoneController,
+              hintTextAluno: 'Tel.:',
             ),
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
-              validator: (value) {
-                final isValidator = value ?? "";
-                if (isValidator.isEmpty) {
-                  return "Campo Obrigatório";
-                }
-                return null;
-              },
-              controller: _situacaoController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                hintText: 'Situação',
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: TextFormField(
-                controller: _descController,
-                maxLines: 4,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  hintText: 'Observação',
-                ),
-              ),
+            TextFieldAluno(
+              controllerAluo: _descController,
+              hintTextAluno: 'Observação',
+              nLinhas: 4,
             ),
             const SizedBox(
               height: 10,

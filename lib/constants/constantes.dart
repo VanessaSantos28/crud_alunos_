@@ -8,3 +8,6 @@ const kSmallTextStyleSubtitle = const TextStyle(
   color: Color.fromARGB(255, 117, 117, 117),
   fontWeight: FontWeight.bold,
 );
+
+const kSmallTextStyleMensalidade =
+    TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontSize: 14);
